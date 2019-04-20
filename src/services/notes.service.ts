@@ -2,14 +2,14 @@
 import { AngularFireDatabase } from '@angular/fire/database';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { MatSnackBar } from '@angular/material';
+import { HelperService } from 'src/helpers/helper.service';
 
 @Injectable()
 export class NotesService {
     notas:BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
     constructor(
         public afDB:AngularFireDatabase,
-        private _snackBar: MatSnackBar
+        private helper:HelperService
     ) {
     }
 
@@ -29,9 +29,9 @@ export class NotesService {
             nota.id   = Date.now();
             let rpta  = await this.afDB.database.ref(`/notes/${nota.id}`).set(nota);
             this.notas.next([...this.getNotas, nota]);
-            this._message('Se registró');
+            this.helper._messageSnack('Se registró');
         } catch (err) {
-            this._message('Hubo un error');
+            this.helper._messageSnack('Hubo un error');
         }
         
         
@@ -44,10 +44,5 @@ export class NotesService {
         this.afDB.database.ref(`/notes/${id}`).remove();
     }
 
-    public _message(msj:string):void {
-        this._snackBar.open(msj, 'Cerrar',{
-          duration : 3000
-        });
-      }
      
 }

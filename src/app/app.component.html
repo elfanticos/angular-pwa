@@ -1,4 +1,7 @@
  <mat-toolbar color="primary">My App</mat-toolbar>
+ <button mat-raised-button color="accent" (click)="login()">Ingresar</button>
+ {{ message | async | json }}
+ 
  <mat-accordion>
   <mat-expansion-panel [expanded]="expand">
     <mat-expansion-panel-header>

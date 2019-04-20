@@ -25,6 +25,9 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NotesService } from 'src/services/notes.service';
+import { AuthService } from 'src/services/auth.service';
+import { HelperService } from 'src/helpers/helper.service';
+import { MessagingService } from 'src/services/messaging.service';
 
 const firebaseConfig:any =  {
   production: false,
@@ -62,7 +65,7 @@ const firebaseConfig:any =  {
     MatListModule,
     MatSnackBarModule
   ],
-  providers: [NotesService],
+  providers: [NotesService,AuthService,HelperService,MessagingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
